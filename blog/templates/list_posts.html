@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="post-title" style="font-family: 'Poppins', sans-serif;">Beberapa kategori yang menarik untuk anda</div>
+    <a href="{% url 'list_posts' %}" class="tombol-kategori">All</a>
+    {% for category in categories %}
+    <a href="{% url 'list_posts' %}?category={{ category.name}}" class="tombol-kategori text-title-kategori hover-button" style="font-family: 'Poppins', sans-serif; text-decoration: none;">{{ category.name }}</a>
+    <div class="hover-card">
+        <p>{{ category.desc }}</p>
+    </div>
+        {% endfor %}
+    </div>
+    <div id="category-posts-container">
+        <!-- Tempat posting yang sesuai dengan kategori akan ditampilkan di sini -->
+      </div>
+      
+
+      {% for post in posts %}
+      <div class="card" style="font-family: 'Poppins', sans-serif;">
+        <div class="card-body">
+            <h5 class="card-title text-title-post">{{ post.title }}</h5>
+            <div class="post-info" style="font-family: 'Poppins', sans-serif;">
+                Author: {{ post.author }}
+                <br>
+                Waktu Upload: {{ post.created_date }}
+            </div>
+            <a href="{% url 'post_detail' post.pk %}" class="tombol-detail" style="font-family: 'Poppins', sans-serif; text-decoration: none;">Read more Detail</a>
+            <div class="post-category" style="font-family: 'Poppins', sans-serif;">category: {{ post.category }}</div>
+            <div class="comment-count" style="font-family: 'Poppins', sans-serif;">
+                Total Comments: {{ post.comments.count }}
+            </div>
+        </div>
+    </div>
+        
+    {% endfor %}
+
+  
+{% endblock %}
+
+

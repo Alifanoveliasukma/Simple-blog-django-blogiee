@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+  <h2>Your Profile</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="media">
+        {% if user.profile.image %}
+        <img src="{{ user.profile.image.url }}" alt="" class="img-rounded account-img rounded-circle">
+        {% else %}
+        <img src="{% static 'path/to/default.jpg' %}" alt="" class="img-rounded account-img rounded-circle">
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-md-8">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form|crispy }}
+        {{ profile_form|crispy }}
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

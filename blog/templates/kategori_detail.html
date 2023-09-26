@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>{{ kategori.name }}</p>
+<a href="{% url 'list_kategori' %}">Back to all kategori</a>
+<a href="{% url 'update_kategori' kategori.pk %}">Edit</a>
+<a href="{% url 'delete_kategori' kategori.pk %}">Delete</a>
+{% endblock %}
